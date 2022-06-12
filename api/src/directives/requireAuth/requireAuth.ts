@@ -3,6 +3,7 @@ import gql from 'graphql-tag'
 import { createValidatorDirective } from '@redwoodjs/graphql-server'
 
 import { requireAuth as applicationRequireAuth } from 'src/lib/auth'
+import { logger } from 'src/lib/logger'
 
 export const schema = gql`
   """
@@ -14,6 +15,8 @@ export const schema = gql`
 
 const validate = ({ directiveArgs }) => {
   const { roles } = directiveArgs
+  logger.info('is :', roles)
+
   applicationRequireAuth({ roles })
 }
 
